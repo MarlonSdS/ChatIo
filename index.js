@@ -10,13 +10,16 @@ app.get("/", (req, res) =>{
 })
 
 io.on("connection", (socket) => {
-    socket.on("boasvindas", (data) =>{
+
+    socket.on("disconnect", () =>{
+        console.log("X desconectou"+ socket.id)
+    })
+
+    socket.on("msg", (data)=>{
+        io.emit("showMsg", data)
         console.log(data)
     })
 
-    socket.on("palavra", (data) =>{
-        console.log(data)
-    })
 })
 
 http.listen(3000, () =>{
